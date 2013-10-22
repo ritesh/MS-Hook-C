@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Ms-hook-c by hexploitable</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/hexploitable/MS-Hook-C">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Ms-hook-c</h1>
+            <h2>A memory scanner which can be used to dynamically look up and hook private code within iOS binaries. The scanner also works on OSX too however the mechanism for hooking is different. For iOS, please use Theos.</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/hexploitable/MS-Hook-C/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/hexploitable/MS-Hook-C/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>
+<a name="hooking-private-code" class="anchor" href="#hooking-private-code"><span class="octicon octicon-link"></span></a>Hooking Private Code</h1>
+
+<p>As far as the scanner is concerned, I'm finished with it. I'm going to do a final sweep and remove superfluous code and then I'll land the final commit.</p>
+
+<p>Contact: <code>wiresharkGD@gmail.com</code> || <code>@Hexploitable</code></p>
+
+<h2>
+<a name="instructions" class="anchor" href="#instructions"><span class="octicon octicon-link"></span></a>Instructions</h2>
+
+<ol>
+<li><p>Open app in disassembler, grab first ~16 bytes (customise this as you will) of target method and use as signature with scanner.</p></li>
+<li>
+<p>Run the scanner against the target process. It will locate the signature in memory and print it's address. The signature has to be passed in as bytes, not a literal string so use the scanner as shown:</p>
+
+<pre><code>./scanner &lt;pid&gt; $'&lt;signature&gt;'
+</code></pre>
+
+<p>e.g:
+    ./scanner 1337 $'\xDE\xAD\xBE\xEF'</p>
+</li>
+<li>
+<p>Use the returned address in Tweak.xm to hook it.</p>
+
+<ul>
+<li>  If ASLR/PIE is enabled - simply get the address of an import too, calculate the offset and then modify Tweak.xm to use an offset instead of a hardcoded address, this way you can hook it, knowing it'll work 100% of the time. </li>
+</ul>
+</li>
+<li>
+<p>You will now need to set the binary's entitlements appropriately:</p>
+
+<pre><code>ldid -Sentitlements.xml &lt;scanner binary&gt;
+</code></pre>
+</li>
+<li>
+<p>Inject your library into the process as you normally would:</p>
+
+<pre><code>DYLD_INSERT_LIBRARIES=/Library/MobileSubstrate/DynamicLibraries/&lt;lib&gt;.dylib ./&lt;binary&gt;
+</code></pre>
+</li>
+</ol>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/hexploitable">hexploitable</a> can be found on <a href="https://github.com/hexploitable/MS-Hook-C">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
