@@ -59,15 +59,17 @@ You can hook code on OSX easily so I won't be covering it here.</p>
 <a name="instructions" class="anchor" href="#instructions"><span class="octicon octicon-link"></span></a>Instructions</h2>
 
 <ol>
-<li><p>Open app in disassembler, grab first ~16 bytes (customise this as you will) of target method and use as signature with scanner.</p></li>
+<li><p>Open your target app in a disassembler, grab first ~16 bytes (customise this as you will) of the method you want to hook and then use these as the signature with the scanner.</p></li>
 <li>
 <p>Run the scanner against the target process. It will locate the signature in memory and print it's address. The signature has to be passed in as bytes, not a literal string so use the scanner as shown:</p>
 
 <pre><code>sudo ./scanner &lt;pid&gt; $'&lt;signature&gt;'
 </code></pre>
 
-<p>e.g:
-    sudo ./scanner 1337 $'\xDE\xAD\xBE\xEF'</p>
+<p>e.g:</p>
+
+<pre><code>sudo ./scanner 1337 $'\xDE\xAD\xBE\xEF'
+</code></pre>
 </li>
 <li>
 <p>Use the returned address in Tweak.xm to hook it.</p>
