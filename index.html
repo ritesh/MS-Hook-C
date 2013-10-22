@@ -63,11 +63,11 @@ You can hook code on OSX easily so I won't be covering it here.</p>
 <li>
 <p>Run the scanner against the target process. It will locate the signature in memory and print it's address. The signature has to be passed in as bytes, not a literal string so use the scanner as shown:</p>
 
-<pre><code>./scanner &lt;pid&gt; $'&lt;signature&gt;'
+<pre><code>sudo ./scanner &lt;pid&gt; $'&lt;signature&gt;'
 </code></pre>
 
 <p>e.g:
-    ./scanner 1337 $'\xDE\xAD\xBE\xEF'</p>
+    sudo ./scanner 1337 $'\xDE\xAD\xBE\xEF'</p>
 </li>
 <li>
 <p>Use the returned address in Tweak.xm to hook it.</p>
