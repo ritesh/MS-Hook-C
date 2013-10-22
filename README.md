@@ -10,9 +10,9 @@ Contact: `wiresharkGD@gmail.com` || `@Hexploitable`
 
 2. Run the scanner against the target process. It will locate the signature in memory and print it's address. The signature has to be passed in as bytes, not a literal string so use the scanner as shown:
 
-		./scanner <pid> $'<signature>'
+		sudo ./scanner <pid> $'<signature>'
 e.g:
-		./scanner 1337 $'\xDE\xAD\xBE\xEF'
+		sudo ./scanner 1337 $'\xDE\xAD\xBE\xEF'
 
 3. Use the returned address in Tweak.xm to hook it.
 	-	If ASLR/PIE is enabled - simply get the address of an import too, calculate the offset and then modify Tweak.xm to use an offset instead of a hardcoded address, this way you can hook it, knowing it'll work 100% of the time. 
