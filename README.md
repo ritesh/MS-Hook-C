@@ -1,4 +1,4 @@
-#Hooking Private Code
+#Hooking Private Code from Stripped iOS Binaries
 
 As far as the scanner is concerned, I'm finished with it. I'm going to do a final sweep and remove superfluous code and then I'll land the final commit.
 
@@ -6,12 +6,13 @@ Contact: `wiresharkGD@gmail.com` || `@Hexploitable`
 
 ##Instructions
 
-1. Open app in disassembler, grab first ~16 bytes (customise this as you will) of target method and use as signature with scanner.
+1. Open your target app in a disassembler, grab first ~16 bytes (customise this as you will) of the method you want to hook and then use these as the signature with the scanner.
 
 2. Run the scanner against the target process. It will locate the signature in memory and print it's address. The signature has to be passed in as bytes, not a literal string so use the scanner as shown:
 
 		sudo ./scanner <pid> $'<signature>'
 e.g:
+
 		sudo ./scanner 1337 $'\xDE\xAD\xBE\xEF'
 
 3. Use the returned address in Tweak.xm to hook it.
