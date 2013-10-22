@@ -18,9 +18,10 @@ e.g:
 	-	If ASLR/PIE is enabled - simply get the address of an import too, calculate the offset and then modify Tweak.xm to use an offset instead of a hardcoded address, this way you can hook it, knowing it'll work 100% of the time. 
 
 4. You will now need to set the binary's entitlements appropriately:
-		ldid -Sentitlements.xml <scanner binary>
+
+		"ldid -Sentitlements.xml <scanner binary>"
 
 5. Inject your library into the process as you normally would.
-		DYLD_INSERT_LIBRARIES=/Library/MobileSubstrate/DynamicLibraries/<libName>.dylib ./<binary>
+		"DYLD_INSERT_LIBRARIES=/Library/MobileSubstrate/DynamicLibraries/<libName>.dylib ./<binary>"
 
 
