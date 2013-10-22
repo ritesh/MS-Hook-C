@@ -49,12 +49,12 @@ mach_vm_address_t *scanMem(int pid, mach_vm_address_t addr, mach_msg_type_number
                 return (unsigned long long *)addr;
             }
             else
-                printf("[-] %p ---> vm_read()\r", addr);
+                printf("[-] %p ---> vm_read()\r", (void *) addr);
             fflush(stdout);
         }
         else
         {
-            printf("[-] %p ---> vm_read().\r", addr);
+            printf("[-] %p ---> vm_read().\r", (void *) addr);
             fflush(stdout);
         }
         addr += sizeof(unsigned char);
@@ -99,7 +99,7 @@ unsigned int *getMemRegions(task_t task, vm_address_t address)
             flag = 1;
     }
     lastRegionEnd = address;
-    printf("[i] Region to scan: %p - %p\n", firstRegionBegin, lastRegionEnd);
+    printf("[i] Region to scan: %p - %p\n", (void *)firstRegionBegin, (void *)lastRegionEnd);
     unsigned int *ptrToFunc = (unsigned int *)scanMem(pid, firstRegionBegin, fullSize);
     return ptrToFunc;
 }
