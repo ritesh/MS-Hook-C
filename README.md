@@ -19,9 +19,8 @@ e.g:
 
 4. You will now need to set the binary's entitlements appropriately:
 
-		"ldid -Sentitlements.xml <scanner binary>"
+		ldid -Sentitlements.xml <scanner binary>
 
-5. Inject your library into the process as you normally would.
-		"DYLD_INSERT_LIBRARIES=/Library/MobileSubstrate/DynamicLibraries/<libName>.dylib ./<binary>"
+5. Inject your library into the process as you normally would:
 
-
+		DYLD_INSERT_LIBRARIES=/Library/MobileSubstrate/DynamicLibraries/<libName>.dylib ./<binary>
